@@ -1,4 +1,4 @@
-class Circle {
+class Shape {
     // class properties
     x;
     y;
@@ -13,6 +13,8 @@ class Circle {
     dead;
     timeAlive;
 
+    originalStates;
+
   constructor(x, y, size, fillColour, lifeSpan, vx, vy) {
     this.x = x;
     this.y = y;
@@ -22,6 +24,8 @@ class Circle {
     this.birthTime = millis();
     this.vx = vx;
     this.vy = vy;
+    
+    this.originalStates = {size: this.size};
   }
 
   update() {
@@ -31,6 +35,11 @@ class Circle {
     if (ratio >=1){
         this.dead = true;
     }
+
+
+    this.size = this.originalStates.size * (1-ratio); // remap ratio to 1
+    
+    //this.alpha = this.originalStates.alpha * (1-ratio);
 
     // update position
     this.x += this.vx;
@@ -43,5 +52,11 @@ class Circle {
     if (this.y < 0 + this.size/2 || this.y > height - this.size/2){
         this.vy *= -1; // reverse direction
     }
+
+    // colour based on time alive
+    let r = red(this.fillColour) * (1-ratio);
+    let g = green(this.fillColour) * (1-ratio);
+    let b = blue(this.fillColour) * (1-ratio);
+    this.fillColour = color(r, g, b, 255 * (1-ratio));
   }
 }
