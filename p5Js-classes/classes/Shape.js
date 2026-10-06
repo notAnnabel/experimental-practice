@@ -1,6 +1,6 @@
 class Shape {
     // class properties
-    x;
+    x; // position
     y;
 
     vx; // velocity
@@ -41,7 +41,7 @@ class Shape {
     
     //this.alpha = this.originalStates.alpha * (1-ratio);
 
-    // update position
+    // update position, it increments with velocity
     this.x += this.vx;
     this.y += this.vy
     // test for boundary collision

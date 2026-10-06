@@ -1,4 +1,4 @@
-// shapes storage
+// shape + button storage
 let allShapes = [];
 let buttons = [];
 
@@ -6,7 +6,6 @@ let prevMouseX, prevMouseY;
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
-  //frameRate(60);
   //rectMode(CENTER);
   //let offset = (width - SoundButton.Width  * SoundButton.Width /2);
   let offset = 500;
