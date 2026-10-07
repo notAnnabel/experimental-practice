@@ -1,8 +1,8 @@
-class Square extends Shape{
+class Triangle extends Shape{
 
   draw(){
     fill(this.fillColour);
-    square(this.x, this.y, this.size);
+    triangle(this.x, this.y, this.size);
     //mySquare.center()
   }
 
