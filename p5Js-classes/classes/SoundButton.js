@@ -11,6 +11,9 @@ class SoundButton {
         this.x = x;
         this.y = y;
         this.colour = colour;
+        this.delayFilterDraw = 0;// changed millis to 0
+
+        this.buttonClickOne = false; // turns true when used
     }
 
 
@@ -20,10 +23,24 @@ class SoundButton {
 
         _renderer.canvas.dispatchEvent(event);
 
-        if (this.index === 1) { 
-            drawFilter(); 
-        }
+        if (this.index === 1 && !this.buttonClickOne) {
+            this.buttonClickOne = true;
+            if (this.buttonClickOne === true) {
+                setTimeout(drawFilter, 1000);
+                //drawFilter();
+                //this.delayFilterDraw = 0;
+                this.buttonClickOne = false;
+            }
 
+            // if (this.index === 2){
+            //    
+
+        }
+        //}
+        ///// attempted to use millis, not necessary. learnt setTimeout. Then realized
+        // this.index === 1 causes repeat draws each frame
+        // to fix
+        // used delayfilterdraw + millis
     }
 
 

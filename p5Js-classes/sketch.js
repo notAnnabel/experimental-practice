@@ -31,6 +31,8 @@ function drawFilter(){
   filter(INVERT);
 }
 
+drawFilter = () => (filter(INVERT)); 
+
 
 function draw() {
   background(220);
@@ -83,6 +85,14 @@ function draw() {
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].draw();
   }
-  //drawFilter();
-}
 
+  //delayFilterDraw = 0;
+  //delayFi
+  //delayFilterDiff = millis() - delayFilterDraw
+  //drawFilter();
+
+  // originally going to do millis calc but settimeout is better for this case
+  // it is in button 
+
+
+}
