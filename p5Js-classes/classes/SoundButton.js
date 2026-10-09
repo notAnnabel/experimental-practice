@@ -13,18 +13,24 @@ class SoundButton {
         this.colour = colour;
         this.delayFilterDraw = 0;// changed millis to 0
 
-        this.buttonClickOne = false; // turns true when used
+        //this.buttonClickOne = false; // turns true when used, flag
     }
 
 
     buttonPressed() {
         //console.log("button pressed: " + this.index)
         const event = new CustomEvent('soundButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        const eventFilter = new CustomEvent('FilterSwapPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        const eventDrawSquare = new CustomEvent('squareButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        const eventDrawTriangle = new CustomEvent('triangleButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+
 
         _renderer.canvas.dispatchEvent(event);
+        _renderer.canvas.dispatchEvent(eventDrawTriangle)
+        _renderer.canvas.dispatchEvent(eventDrawSquare);
 
-        if (this.index === 1 && !this.buttonClickOne) {
-            this.buttonClickOne = true;
+        if (this.index === 1) {
+            //this.buttonClickOne = true;
             if (this.buttonClickOne === true) {
                 setTimeout(drawFilter, 1000);
                 //drawFilter();
@@ -33,7 +39,8 @@ class SoundButton {
             }
 
             // if (this.index === 2){
-            //    
+        }
+        if (this.index === 2){
 
         }
         //}
@@ -61,7 +68,8 @@ class SoundButton {
         rect(this.x, this.y, SoundButton.Width, SoundButton.Height);
     }
 
-
-
-
 }
+
+
+
+
