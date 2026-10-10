@@ -7,7 +7,7 @@ let prevMouseX, prevMouseY;
 let buttonCircleFlag = false;
 let buttonSquareFlag = false;
 let buttonTriangleFlag = false;
-let textBeginFlag = false;
+let textBeginFlag = true;
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
@@ -30,6 +30,8 @@ function setup() {
 
   _renderer.canvas.addEventListener("squareButtonPressed", placeSquare)
 
+  _renderer.canvas.addEventListener("pageRefresh", pageRefresh);
+
   //_renderer.canvas.addEventListener("", (eventMakeSquare) =>)
 }
 
@@ -39,9 +41,16 @@ function setup() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-const beginText = () => (
-  text("Click on any button to begin", width/2, height/2)
-);
+// const beginTextRemove = () => {
+//   if(textBeginFlag === true){
+//      fill("white")
+//      text("Click on any button to begin", width/2, height/2)
+//   }
+//   if (onmousedown){
+//      textBeginFlag = false;
+//   }
+ 
+// }; //changed to mouseClicked as there is an inbuilt p5js function
 
 
 function placeCircle(event) {
@@ -61,6 +70,7 @@ function placeTriangle(eventDrawTriangle){
                                     eventDrawTriangle.detail.x3, eventDrawTriangle.detail.y3, random(20,100),
                                     eventDrawTriangle.detail.colour, random(2000, 5000), random(-2, 2), random(-2, 2))
   allShapes.push(buttontriangle)
+  console.log("did i do that?")
 }
 
 function placeSquare(eventDrawSquare){
@@ -80,12 +90,22 @@ function drawFilter(eventFilter){
   
 }
 
+function pageRefresh(eventPageRefresh){
+  if (eventPageRefresh.detail.index === 4){
+    //pageRefresh()
+    //refresh(); // p5js function that returns sketch to its original values
+    window.location.reload();
+    console.log("yay?")
+  }
+}
+
 //drawFilter = () => (filter(INVERT)); 
 
 
 function draw() {
   background(220);
   noStroke();
+  //beginTextRemove();
 
   if (mouseIsPressed) {
 
@@ -94,14 +114,14 @@ function draw() {
     let mappedDx = map(dx, -width, width, -100, 100);
     let mappedDy = map(dy, -height, height, -100, 100);
     
-    // let myCircle = new Circle(
-    //   mouseX, mouseY, // pos
-    //   random(10, 100), // size
-    //   color(random(20), random(100), random(255)),
-    //   random(1000, 4000), // lifeSpan
-    //   //random(-5, 5), random(-5, 5), // rand velocity
-    //   mappedDx, mappedDy
-    // );
+    let myCircle = new Circle(
+      mouseX, mouseY, // pos
+      random(10, 100), // size
+      color(random(20), random(100), random(255)),
+      random(1000, 4000), // lifeSpan
+      //random(-5, 5), random(-5, 5), // rand velocity
+      mappedDx, mappedDy
+    );
 
 
     let mySquare = new Square(
@@ -120,13 +140,9 @@ function draw() {
 
      );
 
-
-
-    //let leftButton = new SoundButton(0, 100, 100, color(255, 0, 0));
-
-    //allShapes.push(myCircle);
-    //allShapes.push(mySquare);
-    //allShapes.push(myTriangle)
+    allShapes.push(myCircle);
+    allShapes.push(mySquare);
+    allShapes.push(myTriangle)
     
   }
 
@@ -157,7 +173,7 @@ function draw() {
   }
   
 
-  drawFilter()
+  //drawFilter(eventFilter.detail)
 
 
 

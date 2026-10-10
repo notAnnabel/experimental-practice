@@ -23,11 +23,13 @@ class SoundButton {
         const eventFilter = new CustomEvent('FilterSwapPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
         const eventDrawSquare = new CustomEvent('squareButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
         const eventDrawTriangle = new CustomEvent('triangleButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        const eventPageRefresh = new CustomEvent('pageRefresh', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
 
 
         _renderer.canvas.dispatchEvent(event);
-        _renderer.canvas.dispatchEvent(eventDrawTriangle)
+        _renderer.canvas.dispatchEvent(eventDrawTriangle);
         _renderer.canvas.dispatchEvent(eventDrawSquare);
+        
 
         if (this.index === 1) {
             //this.buttonClickOne = true;
@@ -40,8 +42,8 @@ class SoundButton {
 
             // if (this.index === 2){
         }
-        if (this.index === 2){
-
+        if (this.index === 4){
+           _renderer.canvas.dispatchEvent(eventPageRefresh);
         }
         //}
         ///// attempted to use millis, not necessary. learnt setTimeout. Then realized
