@@ -4,6 +4,11 @@ let buttons = [];
 
 let prevMouseX, prevMouseY;
 
+let buttonCircleFlag = false;
+let buttonSquareFlag = false;
+let buttonTriangleFlag = false;
+let textBeginFlag = false;
+
 function setup() {
   createCanvas(innerWidth, innerHeight);
   //rectMode(CENTER);
@@ -33,10 +38,17 @@ function setup() {
 /////////////////////////////////////// functions used with events ///////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+const beginText = () => (
+  text("Click on any button to begin", width/2, height/2)
+);
+
+
 function placeCircle(event) {
   console.log("event with index:" + event.detail.index)
   if(event.detail.index===0){
     let buttoncircle = new Circle(event.detail.x, event.detail.y, random(20, 100), event.detail.colour, random(2000, 5000), random(-2, 2), random(-2, 2));
+    
     allShapes.push(buttoncircle)
   }
   
@@ -81,15 +93,15 @@ function draw() {
     let dy = mouseY - prevMouseY;
     let mappedDx = map(dx, -width, width, -100, 100);
     let mappedDy = map(dy, -height, height, -100, 100);
-
-    let myCircle = new Circle(
-      mouseX, mouseY, // pos
-      random(10, 100), // size
-      color(random(20), random(100), random(255)),
-      random(1000, 4000), // lifeSpan
-      //random(-5, 5), random(-5, 5), // rand velocity
-      mappedDx, mappedDy
-    );
+    
+    // let myCircle = new Circle(
+    //   mouseX, mouseY, // pos
+    //   random(10, 100), // size
+    //   color(random(20), random(100), random(255)),
+    //   random(1000, 4000), // lifeSpan
+    //   //random(-5, 5), random(-5, 5), // rand velocity
+    //   mappedDx, mappedDy
+    // );
 
 
     let mySquare = new Square(
@@ -112,9 +124,9 @@ function draw() {
 
     //let leftButton = new SoundButton(0, 100, 100, color(255, 0, 0));
 
-    allShapes.push(myCircle);
-    allShapes.push(mySquare);
-    allShapes.push(myTriangle)
+    //allShapes.push(myCircle);
+    //allShapes.push(mySquare);
+    //allShapes.push(myTriangle)
     
   }
 
@@ -143,6 +155,11 @@ function draw() {
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].draw();
   }
+  
+
+  drawFilter()
+
+
 
   //delayFilterDraw = 0;
   //delayFi
@@ -154,3 +171,4 @@ function draw() {
 
 
 }
+

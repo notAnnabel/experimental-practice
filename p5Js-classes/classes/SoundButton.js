@@ -31,12 +31,12 @@ class SoundButton {
 
         if (this.index === 1) {
             //this.buttonClickOne = true;
-            if (this.buttonClickOne === true) {
+            //if (this.buttonClickOne === true) {
                 setTimeout(drawFilter, 1000);
                 //drawFilter();
                 //this.delayFilterDraw = 0;
-                this.buttonClickOne = false;
-            }
+                //this.buttonClickOne = false;
+            //}
 
             // if (this.index === 2){
         }
