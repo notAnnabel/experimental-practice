@@ -1,6 +1,9 @@
 # experimental-practice
 A series of mini workshops I attended
 
-| Master class list | Further information |
+| Master class list | Week |
 --------------------|----------------------
-1) p5.js classes    | where I researched more into p5.js classes
+p5.js classes       | WEEK 1
+--------------------|----------------------
+xxx                 | WEEK 2
+--------------------|----------------------
