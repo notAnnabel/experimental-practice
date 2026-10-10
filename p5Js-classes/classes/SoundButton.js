@@ -27,7 +27,7 @@ class SoundButton {
 
 
         _renderer.canvas.dispatchEvent(event);
-        _renderer.canvas.dispatchEvent(eventDrawTriangle);
+        //_renderer.canvas.dispatchEvent(eventDrawTriangle);
         _renderer.canvas.dispatchEvent(eventDrawSquare);
         
 
@@ -41,6 +41,10 @@ class SoundButton {
             //}
 
             // if (this.index === 2){
+        }
+        if (this.index===3){
+            buttonTriangleFlag = true; // enables triangle
+            _renderer.canvas.dispatchEvent(eventDrawTriangle);
         }
         if (this.index === 4){
            _renderer.canvas.dispatchEvent(eventPageRefresh);

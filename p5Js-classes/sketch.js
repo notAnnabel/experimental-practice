@@ -4,8 +4,6 @@ let buttons = [];
 
 let prevMouseX, prevMouseY;
 
-let buttonCircleFlag = false;
-let buttonSquareFlag = false;
 let buttonTriangleFlag = false;
 let textBeginFlag = true;
 
