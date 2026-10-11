@@ -4,7 +4,7 @@ class Shape {
     y;
 
     vx; // velocity
-    yx;
+    vy;
 
     size;
     fillColour;

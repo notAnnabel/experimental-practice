@@ -1,42 +1,39 @@
-// shape + button storage
+// shape + button global variables
 let allShapes = [];
 let buttons = [];
-let labels = [];
+let labels = ["Circles", "Square", "Triangles", "Filter", "Reset"];
+let currentShape; //currently selected button
+
 
 let prevMouseX, prevMouseY;
 
-let buttonTriangleFlag = false;
+
 
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
-  //rectMode(CENTER);
-  //let offset = (width - SoundButton.Width  * SoundButton.Width /2);
-  labels[0] = "Circles";
-  labels[1] = "Filter";
-  labels[2] = "Square";
-  labels[3] = "Triangles";
-  labels[4] = "Reset";
+
+
   let offset = 500;
   for (let i = 0; i < 5; i++) {
-    let button = new SoundButton(i, i * SoundButton.Width + offset, height - SoundButton.Height, color(random(255), random(255), random(255)),labels[i]);
-      
+    let button = new SoundButton(i, i * SoundButton.Width + offset, height - SoundButton.Height, color(random(255), random(255), random(255)), labels[i]);
+
     buttons.push(button)
   }
 
 
   // when canvas rendered, add event listener
-  _renderer.canvas.addEventListener("soundButtonPressed", placeCircle);
+  _renderer.canvas.addEventListener("ButtonPressed", placeShape);
 
-  _renderer.canvas.addEventListener("soundButtonPressed", drawFilter);
+  // _renderer.canvas.addEventListener("filterButtonPressed", drawFilter);
 
-  _renderer.canvas.addEventListener("triangleButtonPressed", placeTriangle);
+  // _renderer.canvas.addEventListener("triangleButtonPressed", placeTriangle);
 
-  _renderer.canvas.addEventListener("squareButtonPressed", placeSquare);
+  // _renderer.canvas.addEventListener("squareButtonPressed", placeSquare);
 
-  _renderer.canvas.addEventListener("pageRefresh", pageRefresh);
+  // _renderer.canvas.addEventListener("pageRefresh", pageRefresh);
 
-  //_renderer.canvas.addEventListener("", (eventMakeSquare) =>)
+
 }
 
 
@@ -45,14 +42,23 @@ function setup() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-function placeCircle(event) {
+function placeShape(event) {
+  let newShape;
 
-  if (event.detail.index === 0) {
-    let buttoncircle = new Circle(event.detail.x, event.detail.y, random(20, 100), event.detail.colour, random(2000, 5000), random(-2, 2), random(-2, 2));
 
-    allShapes.push(buttoncircle)
+  if (event.detail.label === "Circles") {
+    newShape = new Circle(event.detail.x, event.detail.y, random(20, 100), event.detail.colour, random(2000, 5000), random(-2, 2), random(-2, 2));
+    
   }
 
+  if (event.detail.label === "Square") {
+    newShape = new Square(event.detail.x, event.detail.y, random(20, 100), event.detail.colour, random(2000, 5000), random(-2, 2), random(-2, 2));
+  }
+
+  if (event.detail.label === "Reset") {
+    window.location.reload();
+  }  
+  allShapes.push(newShape);
 }
 
 function placeTriangle(eventDrawTriangle) {
@@ -78,39 +84,27 @@ function placeTriangle(eventDrawTriangle) {
   // } meeeeeeeeeeeeeeeeeeee
 }
 
-function placeSquare(eventDrawSquare) {
-  
-  if (eventDrawSquare.detail.index === 2) {
-    let buttonsquare = new Square(eventDrawSquare.detail.x, eventDrawSquare.detail.y, random(20, 100), eventDrawSquare.detail.colour, random(2000, 5000), random(-2, 2), random(-2, 2))
-    allShapes.push(buttonsquare)
-  }
-
-}
 
 
 function drawFilter(eventFilter) {
-  if (eventFilter.detail.index === 1) {
+  if (eventFilter.detail.index === 3) {
     filter(INVERT);
   }
 
 }
 
-function pageRefresh(eventPageRefresh) {
-  if (eventPageRefresh.detail.index === 4) {
-    //pageRefresh()
-    //refresh(); // p5js function that returns sketch to its original values
-    window.location.reload();
-    console.log("yay?")
-  }
-}
+
+
 
 
 
 function draw() {
+  let newShape;
   background(220);
   noStroke();
-  //beginTextRemove();
+ 
 
+  // if the mouse is pressed create a new shape based on current mouse position
   if (mouseIsPressed) {
 
     let dx = mouseX - prevMouseX;
@@ -118,38 +112,41 @@ function draw() {
     let mappedDx = map(dx, -width, width, -100, 100);
     let mappedDy = map(dy, -height, height, -100, 100);
 
-    let myCircle = new Circle(
-      mouseX, mouseY, // pos
-      random(10, 100), // size
-      color(random(20), random(100), random(255)),
-      random(1000, 4000), // lifeSpan
-      //random(-5, 5), random(-5, 5), // rand velocity
-      mappedDx, mappedDy
-    );
 
+   
+    console.log(currentShape, "Draw Function");
 
-    //let mySquare = new Square(
-     // mouseX, mouseY, // pos
-      //random(10, 100), // size
-     // color(random(20), random(100), random(255)),
-     // random(1000, 4000), // lifeSpan
-      //random(-5, 5), random(-5, 5), // rand velocity
-     // mappedDx, mappedDy
-    //);
+    
 
-    //let myTriangle = new Triangle(
-      //mouseX, mouseY, random(10, 100), random(10, 100), random(10, 100), random(10, 100),
-     // mouseX, mouseY, mouseX - 20, mouseY + 20, mouseX + 20, mouseY + 20,
-     // color(random(20), random(100), random(255)), random(1000, 4000), mappedDx, mappedDy
+    if (currentShape = "Circles") {
+      newShape = new Circle(
+        mouseX, mouseY, // pos
+        random(10, 100), // size
+        color(random(20), random(100), random(255)),
+        random(1000, 4000), // lifeSpan
+        mappedDx, mappedDy);
+      console.log("In the circle")
+    } else if (currentShape = "Square") {
 
-    )//;
+      newShape = new Square(
+        mouseX, mouseY, // pos
+        random(10, 100), // size
+        color(random(20), random(100), random(255)),
+        random(1000, 4000), // lifeSpan
+        random(-5, 5), random(-5, 5), // rand velocity
+        mappedDx, mappedDy);
+      console.log("in the square");
+    } else if (currentShape = "Triangles") {
+      console.log("In the triangle");
+      }
 
-    allShapes.push(myCircle);
-    //allShapes.push(mySquare);
-    //allShapes.push(myTriangle)
+    // add new shape to the queue
+    allShapes.push(newShape);
+
 
   }
 
+  // update each shape in the queue. kill off any timed out shapes
   for (let i = 0; i < allShapes.length; i++) {
     allShapes[i].update();
     if (allShapes[i].dead) {
@@ -158,6 +155,7 @@ function draw() {
     }
   }
 
+  // update the command buttons
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].update();
   }
@@ -167,6 +165,8 @@ function draw() {
   prevMouseX = mouseX;
   prevMouseY = mouseY;
 
+
+  // draw all the shapes in the array
   for (let i = 0; i < allShapes.length; i++) {
     allShapes[i].draw();
   }

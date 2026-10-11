@@ -13,62 +13,35 @@ class SoundButton {
         this.colour = colour;
         this.label = label;
         this.delayFilterDraw = 0;// changed millis to 0
-
-        //this.buttonClickOne = false; // turns true when used, flag
+    
+        
     }
 
 
     buttonPressed() {
-        //console.log("button pressed: " + this.index)
-        const eventDrawCircle = new CustomEvent('soundButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-        const eventFilter = new CustomEvent('FilterSwapPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-        const eventDrawSquare = new CustomEvent('squareButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-        const eventDrawTriangle = new CustomEvent('triangleButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-        const eventPageRefresh = new CustomEvent('pageRefresh', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        let eventDraw = new CustomEvent('ButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index , label: this.label} });
+        // const eventFilter = new CustomEvent('filterButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        // const eventDrawSquare = new CustomEvent('squareButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        // const eventDrawTriangle = new CustomEvent('triangleButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        // const eventPageRefresh = new CustomEvent('pageRefresh', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
 
-        
-        setTimeout(drawFilter, 1000);
+         
 
-        if (this.label === "Circles") {
-            // Circles
-            
-                _renderer.canvas.dispatchEvent(eventDrawCircle)
+                  
+        _renderer.canvas.dispatchEvent(eventDraw);
+         currentShape = eventDraw.detail.label;
+         console.log ("button Pressed", currentShape);
                 
-        }
-
-        
-        if (this.label === "Triangles"){
-            _renderer.canvas.dispatchEvent(eventDrawTriangle);
-            
-        }
-
-        if (this.label === "Square"){
-
-            _renderer.canvas.dispatchEvent(eventDrawSquare)
-
-        }
-        if (this.index === "Reset"){
-            // reset the canvas
-           _renderer.canvas.dispatchEvent(eventPageRefresh);
-
-
-        }
-
-        if (this.index === "Filter"){
-            // invert the colours
-           _renderer.canvas.dispatchEvent(eventFilter);
-
-
-
     }
 
-
+        
+    
     buttonReleased() { }
 
     update() {
-        if (mouseIsPressed && mouseX > this.x && mouseX < this.x + SoundButton.Width && mouseY > this.y && mouseY < this.y + SoundButton.Height) {
+        if (mouseIsPressed  && mouseX > this.x && mouseX < this.x + SoundButton.Width && mouseY > this.y && mouseY < this.y + SoundButton.Height) {
             this.buttonPressed()
-            //console.log("mouse pressed: " + mouseIsPressed, "mouseX: " + mouseX, "mouseY: " + mouseY, "buttonX: " + this.x, "buttonY: " + this.y)
+           
         } else {
             this.buttonReleased()
         }
@@ -78,6 +51,8 @@ class SoundButton {
         fill(this.colour);
         //noStroke();
         rect(this.x, this.y, SoundButton.Width, SoundButton.Height);
+
+        // write labels on the buttons
         textSize(50)
         fill("Black")
         textAlign(CENTER,CENTER)
