@@ -6,11 +6,12 @@ class SoundButton {
     y;
     colour;
 
-    constructor(index, x, y, colour) {
+    constructor(index, x, y, colour, label) {
         this.index = index;
         this.x = x;
         this.y = y;
         this.colour = colour;
+        this.label = label;
         this.delayFilterDraw = 0;// changed millis to 0
 
         //this.buttonClickOne = false; // turns true when used, flag
@@ -19,41 +20,46 @@ class SoundButton {
 
     buttonPressed() {
         //console.log("button pressed: " + this.index)
-        const event = new CustomEvent('soundButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
+        const eventDrawCircle = new CustomEvent('soundButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
         const eventFilter = new CustomEvent('FilterSwapPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
         const eventDrawSquare = new CustomEvent('squareButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
         const eventDrawTriangle = new CustomEvent('triangleButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
         const eventPageRefresh = new CustomEvent('pageRefresh', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
 
-
-        _renderer.canvas.dispatchEvent(event);
-        //_renderer.canvas.dispatchEvent(eventDrawTriangle);
-        _renderer.canvas.dispatchEvent(eventDrawSquare);
         
+        setTimeout(drawFilter, 1000);
 
-        if (this.index === 1) {
-            //this.buttonClickOne = true;
-            //if (this.buttonClickOne === true) {
-                setTimeout(drawFilter, 1000);
-                //drawFilter();
-                //this.delayFilterDraw = 0;
-                //this.buttonClickOne = false;
-            //}
-
-            // if (this.index === 2){
+        if (this.label === "Circles") {
+            // Circles
+            
+                _renderer.canvas.dispatchEvent(eventDrawCircle)
+                
         }
-        if (this.index===3){
-            buttonTriangleFlag = true; // enables triangle
+
+        
+        if (this.label === "Triangles"){
             _renderer.canvas.dispatchEvent(eventDrawTriangle);
+            
         }
-        if (this.index === 4){
+
+        if (this.label === "Square"){
+
+            _renderer.canvas.dispatchEvent(eventDrawSquare)
+
+        }
+        if (this.index === "Reset"){
+            // reset the canvas
            _renderer.canvas.dispatchEvent(eventPageRefresh);
+
+
         }
-        //}
-        ///// attempted to use millis, not necessary. learnt setTimeout. Then realized
-        // this.index === 1 causes repeat draws each frame
-        // to fix
-        // used delayfilterdraw + millis
+
+        if (this.index === "Filter"){
+            // invert the colours
+           _renderer.canvas.dispatchEvent(eventFilter);
+
+
+
     }
 
 
@@ -70,8 +76,14 @@ class SoundButton {
 
     draw() {
         fill(this.colour);
-        noStroke();
+        //noStroke();
         rect(this.x, this.y, SoundButton.Width, SoundButton.Height);
+        textSize(50)
+        fill("Black")
+        textAlign(CENTER,CENTER)
+        text(this.label, this.x + SoundButton.Width/2, this.y +  SoundButton.Height /2)
+
+        
     }
 
 }

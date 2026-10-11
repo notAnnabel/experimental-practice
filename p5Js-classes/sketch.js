@@ -1,6 +1,7 @@
 // shape + button storage
 let allShapes = [];
 let buttons = [];
+let labels = [];
 
 let prevMouseX, prevMouseY;
 
@@ -11,9 +12,15 @@ function setup() {
   createCanvas(innerWidth, innerHeight);
   //rectMode(CENTER);
   //let offset = (width - SoundButton.Width  * SoundButton.Width /2);
+  labels[0] = "Circles";
+  labels[1] = "Filter";
+  labels[2] = "Square";
+  labels[3] = "Triangles";
+  labels[4] = "Reset";
   let offset = 500;
   for (let i = 0; i < 5; i++) {
-    let button = new SoundButton(i, i * SoundButton.Width + offset, height - SoundButton.Height, color(random(255), random(255), random(255)));
+    let button = new SoundButton(i, i * SoundButton.Width + offset, height - SoundButton.Height, color(random(255), random(255), random(255)),labels[i]);
+      
     buttons.push(button)
   }
 
@@ -72,7 +79,7 @@ function placeTriangle(eventDrawTriangle) {
 }
 
 function placeSquare(eventDrawSquare) {
-  console.log("HELP ME")
+  
   if (eventDrawSquare.detail.index === 2) {
     let buttonsquare = new Square(eventDrawSquare.detail.x, eventDrawSquare.detail.y, random(20, 100), eventDrawSquare.detail.colour, random(2000, 5000), random(-2, 2), random(-2, 2))
     allShapes.push(buttonsquare)
@@ -121,25 +128,25 @@ function draw() {
     );
 
 
-    let mySquare = new Square(
-      mouseX, mouseY, // pos
-      random(10, 100), // size
-      color(random(20), random(100), random(255)),
-      random(1000, 4000), // lifeSpan
+    //let mySquare = new Square(
+     // mouseX, mouseY, // pos
+      //random(10, 100), // size
+     // color(random(20), random(100), random(255)),
+     // random(1000, 4000), // lifeSpan
       //random(-5, 5), random(-5, 5), // rand velocity
-      mappedDx, mappedDy
-    );
+     // mappedDx, mappedDy
+    //);
 
-    let myTriangle = new Triangle(
+    //let myTriangle = new Triangle(
       //mouseX, mouseY, random(10, 100), random(10, 100), random(10, 100), random(10, 100),
-      mouseX, mouseY, mouseX - 20, mouseY + 20, mouseX + 20, mouseY + 20,
-      color(random(20), random(100), random(255)), random(1000, 4000), mappedDx, mappedDy
+     // mouseX, mouseY, mouseX - 20, mouseY + 20, mouseX + 20, mouseY + 20,
+     // color(random(20), random(100), random(255)), random(1000, 4000), mappedDx, mappedDy
 
-    );
+    )//;
 
     allShapes.push(myCircle);
-    allShapes.push(mySquare);
-    allShapes.push(myTriangle)
+    //allShapes.push(mySquare);
+    //allShapes.push(myTriangle)
 
   }
 

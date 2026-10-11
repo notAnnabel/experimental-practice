@@ -38,8 +38,6 @@ class Shape {
 
 
     this.size = this.originalStates.size * (1-ratio); // remap ratio to 1
-    
-    //this.alpha = this.originalStates.alpha * (1-ratio);
 
     // update position, it increments with velocity
     this.x += this.vx;
