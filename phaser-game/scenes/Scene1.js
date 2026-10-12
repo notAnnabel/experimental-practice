@@ -24,6 +24,10 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 100,
             frameHeight: 160
         })
+        this.load.spritesheet("boy-jump", "sprites/boy_jump.png", {
+            frameWidth: 100,
+            frameHeight: 160
+        })
 
         // load backgrounds :3
         this.load.image("blue-jewel", "pickups/Jewel_Blue.png")
@@ -79,6 +83,13 @@ class Scene1 extends Phaser.Scene {
             repeat: -1 // infinite repeat
         })
 
+        this.anims.create({
+            key: "jump", 
+            frames: this.anims.generateFrameNumbers("boy-jump", {start: 0, end:14}),
+            frameRate: 60,
+            repeat: -1
+        })
+
         // controls
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keysWASD = this.input.keyboard.addKeys("W,A,S,D")
@@ -104,6 +115,7 @@ class Scene1 extends Phaser.Scene {
         const isTouchingGround = this.player.body.touching.down || this.player.body.blocked.down
         if (this.spacebar.isDown && isTouchingGround){
             this.player.body.setVelocityY(-128*9)
+            this.player.play("jump", true)
 
         }
     }
@@ -111,5 +123,8 @@ class Scene1 extends Phaser.Scene {
        pickup.destroy();
        Phaser.TintModes.HARD_LIGHT
        player.setTint(0x0000FF);
+       if (player.isTint === true){
+        this.player.body.setVelocityY(-128*12)
+       }
     }
 }
