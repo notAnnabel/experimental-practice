@@ -6,6 +6,8 @@ class Scene1 extends Phaser.Scene {
     cursors;
     keysWASD;
     spacebar;
+    pickups;
+
     constructor(){
         // register scene with the game engine
         super("Scene1"); // call the parent scene
@@ -24,11 +26,13 @@ class Scene1 extends Phaser.Scene {
         })
 
         // load backgrounds :3
+        this.load.image("blue-jewel", "pickups/Jewel_Blue.png")
         this.load.image("background1", "Background_1/Background1_Layer_1.png")
         this.load.image("background2", "Background_1/Background1_Layer_2.png")
         this.load.image("background3", "Background_1/Background1_Layer_3.png")
     }
     create(){
+        this.cameras.main.setBounds(0, 0, 2816, 1280)
         // place items on screen etc
         this.physics.world.setBounds(0, 0, 2816, 1280) // where it starts and extends to
         // create backgrounds
@@ -41,13 +45,23 @@ class Scene1 extends Phaser.Scene {
         // add tileset image, 1st parameter = name of tileset in Tiled, 2nd = Phaser key
         this.tiles = this.map.addTilesetImage("platforms", "platform-tiles")
         // create layer, 1st param = name of *layer* in Tile, 2nd = Phaser map
-        this.plaforms = this.map.createLayer("platforms",this.tiles)
+        this.platforms = this.map.createLayer("platforms",this.tiles)
         
         // make platforms collideable
         this.map.setCollisionBetween(0, 9999);
         this.player = this.physics.add.sprite(128, 1280 - 128 * 3, "boy-run");
+        this.cameras.main.startFollow(this.player, true, 0.05, 0.05); // small lag on last params for aesthetics
         this.player.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, this.platforms);
+        // create pickups
+        this.pickups = this.physics.add.group();
+        const jewels = this.map.createFromObjects("pickups", {
+            key: "blue-jewel"
+        })
+
+        this.pickups.addMultiple(jewels);
+        this.physics.add.collider(this.pickups, this.platforms)
+        this.physics.add.overlap(this.player, this.pickups, this.collectPickup, null, this);
 
         // animations
         this.anims.create({
@@ -75,7 +89,7 @@ class Scene1 extends Phaser.Scene {
         /// update game elemtns each frame
         // negate player x force
         this.player.body.setVelocityX(0);
-        if (this.cursors.left.isdown || this.keysWASD.A.isDown){
+        if (this.cursors.left.isDown || this.keysWASD.A.isDown){
             this.player.body.setVelocityX(-128*3)
             this.player.play("run", true)
             this.player.setFlipX(true);
@@ -92,5 +106,10 @@ class Scene1 extends Phaser.Scene {
             this.player.body.setVelocityY(-128*9)
 
         }
+    }
+    collectPickup(player, pickup){
+       pickup.destroy();
+       Phaser.TintModes.HARD_LIGHT
+       player.setTint(0x0000FF);
     }
 }
