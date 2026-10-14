@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="22" height="10" tilewidth="128" tileheight="128" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="22" height="10" tilewidth="128" tileheight="128" infinite="0" nextlayerid="4" nextobjectid="8">
  <tileset firstgid="1" name="platforms" tilewidth="128" tileheight="128" tilecount="64" columns="8">
   <image source="Tiles/tiles_1024_128x128.png" width="1024" height="1024"/>
  </tileset>
@@ -17,4 +17,26 @@
 34,13,12,24,12,26,26,15,31,32,12,14,26,14,32,12,10,32,12,14,12,34
 </data>
  </layer>
+ <objectgroup id="2" name="fire-powerup">
+  <object id="1" x="203.426" y="447.537">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="pickups">
+  <object id="2" x="714.898" y="209.238">
+   <point/>
+  </object>
+  <object id="3" x="1081.07" y="191.802">
+   <point/>
+  </object>
+  <object id="4" x="836.954" y="819.517">
+   <point/>
+  </object>
+  <object id="5" x="1987.76" y="959.009">
+   <point/>
+  </object>
+  <object id="6" x="2749.16" y="680.025">
+   <point/>
+  </object>
+ </objectgroup>
 </map>
