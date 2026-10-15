@@ -9,6 +9,8 @@ class Scene1 extends Phaser.Scene {
     pickups;
     powerjewels;
 
+    score;
+
     constructor() {
         // register scene with the game engine
         super("Scene1"); // call the parent scene
@@ -30,6 +32,11 @@ class Scene1 extends Phaser.Scene {
             frameHeight: 160
         })
 
+        this.load.spritesheet("fire-bullet", "sprites/fire_bullet.png", {
+            frameWidth: 16,
+            frameHeight: 16
+        })
+
         // load backgrounds :3
         this.load.image("blue-jewel", "pickups/Jewel_Blue.png")
         this.load.image("yellow-jewel", "pickups/Jewel_Yellow.png")
@@ -46,6 +53,9 @@ class Scene1 extends Phaser.Scene {
         this.add.image(1440, 600, "background2");
         this.add.image(1440, 700, "background3");
 
+
+
+
         // create map based on tiled json file
         this.map = this.make.tilemap({ key: "scene1map" })
         console.log("Map object layers:", this.map.objects.map(function (layer) {
@@ -60,6 +70,11 @@ class Scene1 extends Phaser.Scene {
         // create layer, 1st param = name of *layer* in Tile, 2nd = Phaser map
         this.platforms = this.map.createLayer("platforms", this.tiles)
 
+
+        this.score = 0;
+        // function: coordinates, default string, courier font by default
+        this.scoreText = this.add.text(560, 660, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
+
         // make platforms collideable
         this.map.setCollisionBetween(0, 9999);
         this.player = this.physics.add.sprite(128, 1280 - 128 * 3, "boy-run");
@@ -70,6 +85,10 @@ class Scene1 extends Phaser.Scene {
         // create pickups
         this.pickups = this.physics.add.group();
         this.powerpickups = this.physics.add.group();
+
+        this.bullets = this.physics.add.group() // bullet physics group
+        this.nextFire = 0;
+
 
         const jewels = this.map.createFromObjects("pickups", {
             key: "blue-jewel",
@@ -85,6 +104,7 @@ class Scene1 extends Phaser.Scene {
         this.powerpickups.addMultiple(powerjewels); // adds powerjewels to the group
         this.physics.add.collider(this.powerpickups, this.platforms) // its named after the layer in titled (??????????)
         this.physics.add.overlap(this.player, this.powerpickups, this.collectPowerJewel, null, this); // 
+
 
         // animations
         this.anims.create({
@@ -109,10 +129,19 @@ class Scene1 extends Phaser.Scene {
             repeat: -1
         })
 
+
+        this.anims.create({
+            key: "firepowerup",
+            frames: this.anims.generateFrameNumbers("fire-bullet"),
+            frameRate: 6,
+            repeat: -1
+        })
+
         // controls
         this.cursors = this.input.keyboard.createCursorKeys();
-        this.keysWASD = this.input.keyboard.addKeys("W,A,S,D")
+        this.keysWASD = this.input.keyboard.addKeys("W,A,S,D");
         this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
+        this.keyPowerup = this.input.keyboard.addKey("P");
 
     }
     update() {
@@ -123,6 +152,10 @@ class Scene1 extends Phaser.Scene {
             this.player.body.setVelocityX(-128 * 3)
             this.player.play("run", true)
             this.player.setFlipX(true);
+
+            // if (this.keyPowerup === down && this.powerOn === true){
+                
+            // }
         }
         else if (this.cursors.right.isDown || this.keysWASD.D.isDown) {
             this.player.body.setVelocityX(128 * 3)
@@ -137,25 +170,84 @@ class Scene1 extends Phaser.Scene {
             this.player.play("jump", true)
 
         }
+
+        if (this.keyPowerup.isDown && powerOn) {
+           if (this.player.setFlipX){
+            //
+           }
+           else {
+            //
+           }
+        }
+
+        //  const isTouchingGround = this.player.body.touching.down || this.player.body.blocked.down
+        // if (!isTouchingGround && this.spacebar.down) { 
+        //     this.player.body.setVelocityY(-128 * 3)
+        //     this.player.play("jump", true)
+
+        // }
+
+
     }
     collectPickup(player, pickups) { // general blue crystals
         pickups.destroy();
-        Phaser.TintModes.HARD_LIGHT
         player.setTint(0x0000FF);
+
+        this.score += 10;
+        this.scoreText.setText("Score: " + this.score)
         //    if (player.isTint === true){
         //     this.player.body.setVelocityY(-128*12)
         //    }
-    }
 
-    collectPowerJewel(player, powerjewels) { // powerup "fire" yellow crystals 
-        //console.log("im here")
-        powerjewels.destroy();
-        Phaser.TintModes.HARD_LIGHT
-        player.setTint(0xFFA500);
-        //    if (player.isTint === true){
-        //     this.player.body.setGravityY(-128*12)
+        // Cancel the previous timer if the power-up is collected again
+        // if (this.powerUpTimer) {
+        // this.powerUpTimer.remove();
 
 
-        //    }
-    }
-}
+        // Creates a timer event, and adds it to the Clock at the start of the frame.
+        this.pickupTimer = this.time.delayedCall(500, function () {
+            this.powerOn = false;
+            player.clearTint();
+            this.pickupTimer = null;
+        }, [], this);
+    } // delay in ms, callback, arguments for function, .this keyword
+
+
+
+collectPowerJewel(player, powerjewels) {
+    //console.log("im here")
+    this.powerOn = true;
+    powerjewels.destroy();
+    player.setTint(0xFFA500);
+    this.score += 50;
+    this.scoreText.setText("Score: " + this.score);
+    this.powerUpTime = this.time.now
+    player.body.setGravityY(100);
+    this.powerUpTimer = this.time.delayedCall(10000, function () {
+            this.powerOn = false;
+            player.clearTint();
+            player.body.setGravityY(0);
+            this.powerUpTimer = null;
+        }, [], this);
+    } // delay in ms, callback, arguments for function, .this keyword
+
+   
+    //if (timer )
+    //    if (player.isTint === true){
+    //     this.player.body.setGravityY(-128*12
+}  // powerup "fire" yellow crystals 
+
+
+
+
+
+
+
+//}
+
+    
+
+     
+
+
+
