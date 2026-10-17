@@ -14,17 +14,6 @@ class SoundButton {
     }
 
 
-    //buttonPressed() {
-    //        let eventDraw = new CustomEvent('ButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index, label: this.label } });
-    //        // const eventFilter = new CustomEvent('filterButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-            // const eventDrawSquare = new CustomEvent('squareButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-            // const eventDrawTriangle = new CustomEvent('triangleButtonPressed', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-            // const eventPageRefresh = new CustomEvent('pageRefresh', { detail: { x: this.x, y: height / 2, colour: color(random(255), random(255), random(255)), index: this.index } });
-
-    //        _renderer.canvas.dispatchEvent(eventDraw);
-    //        currentShape = eventDraw.detail.label;
-    //        console.log("button Pressed", currentShape);
-    //}
 
     buttonSelected() {
 
@@ -55,6 +44,7 @@ class SoundButton {
             fill("Black")
             textAlign(CENTER, CENTER)
             text(this.label, this.x + SoundButton.buttonWidth / 2, this.y + SoundButton.buttonHeight / 2)
+            // text is the label from the constructor
     }
 
     

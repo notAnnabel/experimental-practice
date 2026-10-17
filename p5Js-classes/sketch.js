@@ -72,18 +72,7 @@ function mouseClicked(event) {
  // }
  
 
-  // add new shape to the list of shapes
- // allShapes.push(newShape);
-//}
 
-
-
-// function drawFilter(eventFilter) {
-//  if (eventFilter.detail.index === 3) {
-//    filter(INVERT);
-//  }
-
-//}
 
 function draw() {
   let newShape;
@@ -99,7 +88,7 @@ function draw() {
     let mappedDx = map(dx, -width, width, -100, 100);
     let mappedDy = map(dy, -height, height, -100, 100);
     
-    if (currentShape === "Circles") {
+    if (currentShape === "Circles") { // mouse clicked, changes current shape based on array label
       newShape = new Circle(
         mouseX, mouseY, // pos
         random(10, 100), // size
@@ -115,8 +104,8 @@ function draw() {
         mappedDx, mappedDy);
       } else if (currentShape === "Triangles") {
         let triangleBase = random(20,100);
-        newShape = new Triangle(mouseX,mouseY,
-                                triangleBase,
+        newShape = new Triangle(mouseX,mouseY, // x, y
+                                triangleBase, // size is effected by base size
                                 color(random(20), random(100), random(255)), // random RGB colour
                                 random(1000, 4000), // lifeSpan
                                 mappedDx, mappedDy);

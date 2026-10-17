@@ -28,6 +28,12 @@ class Shape {
     this.originalStates = {size: this.size};
   }
 
+  changeColour(R,G,B){
+
+    this.fillColour = color(R,G,B)
+
+  }
+
   update() {
     this.timeAlive = millis() - this.birthTime;
     let ratio = this.timeAlive / this.lifeSpan; // num, 0-1 birth and death
