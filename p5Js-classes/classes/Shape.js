@@ -30,12 +30,20 @@ class Shape {
 
   changeColour(R,G,B){
 
+    //this.fillColour = color(R,G,B)
+    R = 255 - R;
+    G = 255 - G;
+    B = 255 - B;
+    //return color(R,G,B)
+
     this.fillColour = color(R,G,B)
+
+    //https://editor.p5js.org/benmoren/sketches/wpWhJ-22g
 
   }
 
   update() {
-    this.timeAlive = millis() - this.birthTime;
+    this.timeAlive = (millis() - this.birthTime) / 2;
     let ratio = this.timeAlive / this.lifeSpan; // num, 0-1 birth and death
     // death test!
     if (ratio >=1){

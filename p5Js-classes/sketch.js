@@ -11,7 +11,8 @@ let prevMouseX, prevMouseY;
 function setup() {
   createCanvas(innerWidth, innerHeight);
   
-  let offset = 300;
+  // center buttons relative to the screen width
+  let offset = (innerWidth-(labels.length*SoundButton.buttonWidth)) /2;
   //create a button for each label
   for (let i = 0; i < labels.length; i++) {
     
@@ -39,10 +40,39 @@ function mouseClicked(event) {
       // the mouse has clicked in one of the buttons
       if (buttons[i].label === "Filter") {
         // run through shape queue and change colours
+        /////////////////for (let j = 0; j < allShapes.length; j++){
+           //getcol = color(allShapes[j]);
+          //  getRed = red(allShapes[j].fillColour);
+          //  getGreen = green(allShapes[j].fillColour);
+          //  getBlue = blue(allShapes[j].fillColour)
+          //  changeColour(getRed, getGreen, getBlue)
+           //changeColour(getcol);
+            console.log("Filter clicked");
+            console.log("Number of shapes:", allShapes.length);
+
+
+           /// chat
+           for (let j =0; j < allShapes.length; j++){
+            
+             console.log("Before:", allShapes[j].fillColour);
+
+            let r = red(allShapes[j].fillColour);
+            let g = green(allShapes[j].fillColour);
+            let b = blue(allShapes[j].fillColour);
+            
+            allShapes[j].changeColour(r,g,b);
+           
+            // allShapes[j] = shape; 
+            console.log("after", allShapes[j].fillColour)
+          //}
+
+           //fill(Shape.changeColour(allShapes[i].fillColour))
+           console.log("working")
+        }
+         
         
         
-        
-        filter(INVERT);
+        //filter(INVERT);
         console.log("filter applied");
       } else if (buttons[i].label === "Reset" ){
         window.location.reload();
@@ -93,14 +123,14 @@ function draw() {
         mouseX, mouseY, // pos
         random(10, 100), // size
         color(random(20), random(100), random(255)),
-        random(1000, 4000), // lifeSpan
+        random(1000, 8000), // lifeSpan
         mappedDx, mappedDy); //velocity
     } else if (currentShape === "Square") {
       newShape = new Square(
         mouseX, mouseY, // pos
         random(10, 100), // size
         color(random(20), random(100), random(255)),
-        random(1000, 4000), // lifeSpan
+        random(1000, 8000), // lifeSpan
         mappedDx, mappedDy);
       } else if (currentShape === "Triangles") {
         let triangleBase = random(20,100);
@@ -115,6 +145,7 @@ function draw() {
 
     // add new shape to the queue
     allShapes.push(newShape);
+    
   }
 
   // update each shape in the queue. kill off any timed out shapes
