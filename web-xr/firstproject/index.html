@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <!--adds interaction-->
+
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.7.x/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fern-solutions/aframe-sky-background/dist/sky-background.umd.min.js"></script>
+    <!-- physics -->
+    <script>
+        AFRAME.registerComponent("toggle-colour", {
+            schema: {
+                colour: { type: "color", default: "yellow" }
+            },
+            init: function () {
+                // get a reference to Aframe entitty to which this component is attached
+                const el = this.el;
+                // get a ref to data
+                const data = this.data
+                // store a reference to the current colour
+                const defaultColour = el.getAttribute("material").color;
+                el.addEventListener("mouseenter", function () {
+                    el.setAttribute("color", data.colour);
+                })
+                el.addEventListener("mouseleave", function () {
+                    el.setAttribute("color", defaultColour)
+                })
+            }
+        })
+    </script>
+    <!-- <script>
+        AFRAME.registerComponent("toggle-honk", {
+            schema: {
+                noise: { type: "mp3" }
+            },
+            init: function () {
+                // get a reference to Aframe entitty to which this component is attached
+                const el = this.el;
+                // get a ref to data
+                const data = this.data
+                // store a reference to the current colour
+                const defaultColour = el.getAttribute("material").color;
+                el.addEventListener("mouseenter", function () {
+                    el.setAttribute("color", data.colour);
+                })
+                el.addEventListener("mouseleave", function () {
+                    el.setAttribute("color", defaultColour)
+                })
+            }
+        })
+    </script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a-scene> <!--aframe scene, with many attributes-->
+        <a-camera>
+            <a-entity cursor="rayOrigin: mouse" raycaster="objects: .interactive"> </a-entity> <!--vanilla container-->
+        </a-camera>
+        <a-entity laser-control="hand: left" raycaster="objects: .interactive"></a-entity>
+        <a-entity laser-control="hand: right" raycaster="objects: .interactive"></a-entity>
+        <a-assets>
+            <a-assets-item id="goose" src="models/scene.gltf"></a-assets-item>
+        </a-assets>
+
+
+        <a-box toggle-colour="colour: blue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
+            color="#4CC3D9"></a-box> <!--if mouse down-->
+        <a-sphere toggle-colour class="interactive" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        <a-cylinder toggle-colour class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
+            color="#FFC65D"></a-cylinder>
+        <a-plane toggle-colour class="interactive" position="0 0 -4" rotation="-90 0 0" width="4" height="4"
+            color="#7BC8A4"></a-plane>
+        <a-sky color="#ECECEC"></a-sky>
+<!-- 
+
+        <a-entity gltf-model="#goose" position="0 0 3" size="0.001 0.001 0.001"></a-entity> -->
+        <!-- <a-entity gltf-model="#goose" class="interactive" position="0 0 3" scale="0.007 0.007 0.007" sound="src: sfx/goose_honk.mp3" on: click></a-entity> -->
+         <a-entity cursor position="0 0 -5"></a-entity>
+        <a-entity gltf-model="#goose" class="interactive" position="0 0 3" scale="0.007 0.007 0.007" sound="src: url(sfx/goose_honk.mp3); on: click"></a-entity>
+        <!-- <a-entity gltf-model="#goose" class="interactive" position="0.5 2.38 -4.9" rotation="0 180 25" scale="0.003 0.003 0.003" sound="src: url(sfx/happy-goose-flaunts.mp3); on: click"></a-entity> -->
+    </a-scene>
+</body>
+
+</html>
