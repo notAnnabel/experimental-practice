@@ -37,9 +37,10 @@ class Scene1 extends Phaser.Scene {
             frameHeight: 16
         })
 
-        // load backgrounds :3
+        // load backgrounds + jewels
         this.load.image("blue-jewel", "pickups/Jewel_Blue.png")
         this.load.image("yellow-jewel", "pickups/Jewel_Yellow.png")
+
         this.load.image("background1", "Background_1/Background1_Layer_1.png")
         this.load.image("background2", "Background_1/Background1_Layer_2.png")
         this.load.image("background3", "Background_1/Background1_Layer_3.png")
@@ -54,7 +55,7 @@ class Scene1 extends Phaser.Scene {
         this.add.image(1440, 700, "background3");
 
 
-
+        
 
         // create map based on tiled json file
         this.map = this.make.tilemap({ key: "scene1map" })
@@ -78,6 +79,7 @@ class Scene1 extends Phaser.Scene {
         // make platforms collideable
         this.map.setCollisionBetween(0, 9999);
         this.player = this.physics.add.sprite(128, 1280 - 128 * 3, "boy-run");
+        //this.defaultspeed = this.player.setVelocity(20, 20)
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05); // small lag on last params for aesthetics
         this.player.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, this.platforms);
@@ -104,7 +106,9 @@ class Scene1 extends Phaser.Scene {
         this.powerpickups.addMultiple(powerjewels); // adds powerjewels to the group
         this.physics.add.collider(this.powerpickups, this.platforms) // its named after the layer in titled (??????????)
         this.physics.add.overlap(this.player, this.powerpickups, this.collectPowerJewel, null, this); // 
+        
 
+        this.bullets.addMultiple()
 
         // animations
         this.anims.create({
@@ -141,7 +145,7 @@ class Scene1 extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keysWASD = this.input.keyboard.addKeys("W,A,S,D");
         this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-        this.keyPowerup = this.input.keyboard.addKey("P");
+        this.keyPowerup = this.input.keyboard.addKey("P"); // powerup key
 
     }
     update() {
@@ -164,21 +168,27 @@ class Scene1 extends Phaser.Scene {
         } else {
             this.player.play("idle", true)
         }
-        const isTouchingGround = this.player.body.touching.down || this.player.body.blocked.down
-        if (this.spacebar.isDown && isTouchingGround) {
-            this.player.body.setVelocityY(-128 * 9)
-            this.player.play("jump", true)
+        const isTouchingGround = this.player.body.touching.down || this.player.body.blocked.down;
+        //const isTouchingAir = this.player.body.touching.down || this.player.body.blocked.down
+        //if (this.spacebar.isDown || isTouchingGround) {
+            if (Phaser.Input.Keyboard.JustDown(this.spacebar) && isTouchingGround){ // one trigger per key press
+               this.player.body.setVelocityY(-128 * 9)
+               this.player.play("jump", false)
+            }
+            if (!isTouchingGround) {
+               this.player.play("jump", true)
+            }
+          
+        //}
 
-        }
-
-        if (this.keyPowerup.isDown && powerOn) {
-           if (this.player.setFlipX){
-            //
-           }
-           else {
-            //
-           }
-        }
+        // if (this.keyPowerup.isDown && this.powerOn) {
+        //    if (this.player.setFlipX){
+        //     this.player.body.setVelocityX(-1 * 1000)
+        //    }
+        //    else {
+        //     //
+        //    }
+        // }
 
         //  const isTouchingGround = this.player.body.touching.down || this.player.body.blocked.down
         // if (!isTouchingGround && this.spacebar.down) { 
@@ -231,7 +241,6 @@ collectPowerJewel(player, powerjewels) {
         }, [], this);
     } // delay in ms, callback, arguments for function, .this keyword
 
-   
     //if (timer )
     //    if (player.isTint === true){
     //     this.player.body.setGravityY(-128*12
