@@ -39,19 +39,7 @@ function mouseClicked(event) {
     if (buttons[i].buttonSelected()) {
       // the mouse has clicked in one of the buttons
       if (buttons[i].label === "Filter") {
-        // run through shape queue and change colours
-        /////////////////for (let j = 0; j < allShapes.length; j++){
-        //getcol = color(allShapes[j]);
-        //  getRed = red(allShapes[j].fillColour);
-        //  getGreen = green(allShapes[j].fillColour);
-        //  getBlue = blue(allShapes[j].fillColour)
-        //  changeColour(getRed, getGreen, getBlue)
-        //changeColour(getcol);
-        console.log("Filter clicked");
-        console.log("Number of shapes:", allShapes.length);
-
-
-        /// chat
+        // chat
         for (let j = 0; j < allShapes.length; j++) {
 
           console.log("Before:", allShapes[j].fillColour);

@@ -55,7 +55,7 @@ class Scene1 extends Phaser.Scene {
         this.add.image(1440, 700, "background3");
 
 
-        
+
 
         // create map based on tiled json file
         this.map = this.make.tilemap({ key: "scene1map" })
@@ -73,6 +73,7 @@ class Scene1 extends Phaser.Scene {
 
 
         this.score = 0;
+        this.win = false;
         // function: coordinates, default string, courier font by default
         this.scoreText = this.add.text(560, 660, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
 
@@ -87,6 +88,15 @@ class Scene1 extends Phaser.Scene {
         // create pickups
         this.pickups = this.physics.add.group();
         this.powerpickups = this.physics.add.group();
+
+        this.rainbowColours = [
+            0xff0000, // red to pink
+            0xff8c00,
+            0xffe100,
+            0x00ff00,
+            0x0000ff,
+            0xa200ff
+        ]
 
         this.bullets = this.physics.add.group() // bullet physics group
         this.nextFire = 0;
@@ -106,7 +116,7 @@ class Scene1 extends Phaser.Scene {
         this.powerpickups.addMultiple(powerjewels); // adds powerjewels to the group
         this.physics.add.collider(this.powerpickups, this.platforms) // its named after the layer in titled (??????????)
         this.physics.add.overlap(this.player, this.powerpickups, this.collectPowerJewel, null, this); // 
-        
+
 
         this.bullets.addMultiple()
 
@@ -158,7 +168,7 @@ class Scene1 extends Phaser.Scene {
             this.player.setFlipX(true);
 
             // if (this.keyPowerup === down && this.powerOn === true){
-                
+
             // }
         }
         else if (this.cursors.right.isDown || this.keysWASD.D.isDown) {
@@ -171,24 +181,13 @@ class Scene1 extends Phaser.Scene {
         const isTouchingGround = this.player.body.touching.down || this.player.body.blocked.down;
         //const isTouchingAir = this.player.body.touching.down || this.player.body.blocked.down
         //if (this.spacebar.isDown || isTouchingGround) {
-            if (Phaser.Input.Keyboard.JustDown(this.spacebar) && isTouchingGround){ // one trigger per key press
-               this.player.body.setVelocityY(-128 * 9)
-               this.player.play("jump", false)
-            }
-            if (!isTouchingGround) {
-               this.player.play("jump", true)
-            }
-          
-        //}
-
-        // if (this.keyPowerup.isDown && this.powerOn) {
-        //    if (this.player.setFlipX){
-        //     this.player.body.setVelocityX(-1 * 1000)
-        //    }
-        //    else {
-        //     //
-        //    }
-        // }
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar) && isTouchingGround) { // one trigger per key press
+            this.player.body.setVelocityY(-128 * 9)
+            this.player.play("jump", false)
+        }
+        if (!isTouchingGround) {
+            this.player.play("jump", true)
+        }
 
         //  const isTouchingGround = this.player.body.touching.down || this.player.body.blocked.down
         // if (!isTouchingGround && this.spacebar.down) { 
@@ -197,66 +196,86 @@ class Scene1 extends Phaser.Scene {
 
         // }
 
+        if (this.score >= 80 && !this.win) {
+            this.win = true
+            this.scoreText.setText("You win!")
+
+            this.rainbowIndex = 0; //starts the rgb colour
+            //     this.loopWinColours = this.time.delayedCall(2000, function () {
+            //     this.player.setTint(this.rainbowColours[this.rainbowIndex])
+
+            //     this.rainbowIndex =
+            //         (this.rainbowIndex + 1) % this.rainbowColours.length; // ch
+            // }, [], this, true)
+            // }
+            this.loopWinColours = this.time.addEvent({delay: 300, callback: function () {
+                this.player.setTint(this.rainbowColours[this.rainbowIndex]);
+
+                this.rainbowIndex =
+                    (this.rainbowIndex + 1) % this.rainbowColours.length; // ch
+            }, callbackScope: this, loop: true}) // configuration object
+        }
+        //while (this.win === true) {
 
     }
+
+
+
+
     collectPickup(player, pickups) { // general blue crystals
         pickups.destroy();
         player.setTint(0x0000FF);
 
         this.score += 10;
         this.scoreText.setText("Score: " + this.score)
-        //    if (player.isTint === true){
-        //     this.player.body.setVelocityY(-128*12)
-        //    }
-
-        // Cancel the previous timer if the power-up is collected again
-        // if (this.powerUpTimer) {
-        // this.powerUpTimer.remove();
 
 
-        // Creates a timer event, and adds it to the Clock at the start of the frame.
+
+
+        //Creates a timer event, and adds it to the Clock at the start of the frame.
         this.pickupTimer = this.time.delayedCall(500, function () {
             this.powerOn = false;
-            player.clearTint();
+            if (!this.win) {
+                player.clearTint();
+            }
             this.pickupTimer = null;
         }, [], this);
-    } // delay in ms, callback, arguments for function, .this keyword
+        //delay in ms, callback, arguments for function, .this keyword
+    }
 
 
+    collectPowerJewel(player, powerjewels) {
+        //console.log("im here")
+        this.powerOn = true;
+        powerjewels.destroy();
 
-collectPowerJewel(player, powerjewels) {
-    //console.log("im here")
-    this.powerOn = true;
-    powerjewels.destroy();
-    player.setTint(0xFFA500);
-    this.score += 50;
-    this.scoreText.setText("Score: " + this.score);
-    this.powerUpTime = this.time.now
-    player.body.setGravityY(100);
-    this.powerUpTimer = this.time.delayedCall(10000, function () {
+        this.score += 50;
+        this.scoreText.setText("Score: " + this.score);
+
+        //this.powerUpTime = this.time.now
+        player.body.setGravityY(100);
+
+
+        if (!this.win) {
+            player.setTint(0xFFA500);
+        }
+
+        this.powerUpTimer = this.time.delayedCall(5000, function () {
             this.powerOn = false;
-            player.clearTint();
+
+            if (!this.win) {
+                player.clearTint();
+            }
+
+
+            //player.clearTint();
             player.body.setGravityY(0);
             this.powerUpTimer = null;
         }, [], this);
     } // delay in ms, callback, arguments for function, .this keyword
 
-    //if (timer )
-    //    if (player.isTint === true){
-    //     this.player.body.setGravityY(-128*12
-}  // powerup "fire" yellow crystals 
 
 
-
-
-
-
-
-//}
-
-    
-
-     
-
-
+    //}
+}
 
