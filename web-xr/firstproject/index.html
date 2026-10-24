@@ -9,11 +9,10 @@
 
     <script
         src="https://cdn.jsdelivr.net/gh/c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js">
-    </script>
+        </script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.7.x/dist/aframe-extras.min.js"></script>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/@fern-solutions/aframe-sky-background/dist/sky-background.umd.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/@fern-solutions/aframe-sky-background/dist/sky-background.umd.min.js">
     </script>
     <!-- physics -->
     <script>
@@ -68,10 +67,10 @@
             <a-assets-item id="goose" src="assets/models/geese/scene.gltf"></a-assets-item>
             <a-assets-item id="gura" src="assets/models/gura/scene.gltf"></a-assets-item>
             <a-assets-item id="calli" src="assets/models/calli/scene.gltf"></a-assets-item>
-            <a-assets-item id="dance-floor" src="assets/smodels/dance-floor/untitled.glb"></a-assets-item>
+            <a-assets-item id="dance-floor" src="assets/models/dance-floor/untitled.glb"></a-assets-item>
             <a-assets-item id="speakers" src="assets/models/speakers/scene.gltf"></a-assets-item>
-            <a-assets-item id="dj-table" src="assets/models/dj-table/scene.gltf"></a-assets-item>
-            <a-assets-item id="disco-ball" src="asset/smodels/disco-ball/scene.gltf"></a-assets-item>
+            <a-asset-item id="dj-table" src="assets/models/dj-table/scene.gltf"></a-asset-item>
+            <a-assets-item id="disco-ball" src="assets/models/disco-ball/scene.gltf"></a-assets-item>
             <img id="sky" src="assets/images/sky.jpg">
         </a-assets>
 
@@ -91,25 +90,42 @@
 
         <a-sky src="#sky"></a-sky>
         <a-entity cursor position="0 0 -5"></a-entity>
-        <a-entity gltf-model="#goose" class="interactive" position="0 0 -3" rotation="0 180 0" scale="0.007 0.007 0.007"
-            sound="src: url(sfx/goose_honk.mp3); on: click"></a-entity>
+        <a-entity gltf-model="#goose" class="interactive" position="3 0 -2" rotation="0 180 0" scale="0.007 0.007 0.007"
+            sound="src: url(assets/sfx/goose_honk.mp3); on: click"
+            animation="property: rotation; to: -10 -20 0; loop: true; dur: 1000; easing: linear;"></a-entity>
         <a-entity gltf-model="#goose" class="interactive" position="-3.5 2.38 -4.9" rotation="0 180 25"
-            scale="0.003 0.003 0.003" sound="src: url(sfx/happy-goose-flaunts.mp3); on: click"></a-entity>
+            scale="0.003 0.003 0.003" sound="src: url(assets/sfx/happy-goose-flaunts.mp3); on: click"></a-entity>
 
-        <a-entity animation-mixer="clip: smolguraAnimationsRESOURCE; useRegExp: false" gltf-model="#gura" class="interactive" position="-1 1 -3" rotation="0 20 0" scale="0.5 0.5 0.5"
-           sound="src: url(sfx/hey-vsauce-gura-here.mp3); on: click "></a-entity>
+        <a-entity animation-mixer="clip: smolguraAnimationsRESOURCE; useRegExp: false" gltf-model="#gura"
+            class="interactive" position="-1 1 -3" rotation="0 20 0" scale="0.5 0.5 0.5"
+            sound="src: url(assets/sfx/hey-vsauce-gura-here.mp3); on: click "></a-entity>
 
-        <a-entity animation-mixer="SmolcalliAnimationsRESOURCE; useRegExp: false" gltf-model="#calli" class="interactive" position="-2 1 -3" rotation="0 20 0" scale="0.5 0.5 0.5" sound="src: url(sfx/calli-hi-honey.mp3); on: click "></a-entity>
+        <a-entity animation-mixer="clip: idle; useRegExp: false; startAt: 10" gltf-model="#calli" class="interactive"
+            position="0 0.25 -6" rotation="0 2 0" scale="0.5 0.5 0.5"
+            sound="src: url(assets/sfx/calli-hi-honey.mp3); on: click "></a-entity>
+        <!-- SmolcalliAnimationsRESOURCE, paradewalk -->
 
-        <a-entity animation-mixer="clip: Animation; useRegExp: false" gltf-model="#dance-floor" position="0 0 -5" scale="2 1 2"></a-entity>
-        <!-- <a-entity animation-mixer gltf-model="#gura" class="interactive" position="-1 2.12 -3" rotation="0 20 0" scale="0.3 0.3 0.3"
-            sound="src: url(sfx/hey-vsauce-gura-here.mp3); on: click"></a-entity> -->
+        <a-entity animation-mixer="clip: Animation; useRegExp: false" gltf-model="#dance-floor" position="0 0 -5"
+            scale="2 1 2"></a-entity>
 
         <a-entity gltf-model="#speakers" position="-1.5 -0.1 -6" rotation="0 270 0" scale="1.4 1.4 1.4"></a-entity>
-        <a-entity gltf-model="#dj-table" position="1 1 1" rotation="0 0 0"></a-entity>
-        <a-entity animation-mixer="clip: Take 001; useRegExp: false" gltf-model="#disco-ball" position="-1 7 -4" rotation="0 0 0" scale="1.5 1.5 1.5"></a-entity>
-        <a-entity bmfont-text="text: HELLO!; color: #333" position="0 0 -5"></a-entity>
+        <a-entity gltf-model="#dj-table" position="0 1 -3" rotation="0 0 0" scale="1 1 1"></a-entity>
+        <a-entity animation-mixer="clip: Take 001; useRegExp: false" gltf-model="#disco-ball" position="-1 7 -4"
+            rotation="0 0 0" scale="1.5 1.5 1.5"></a-entity>
+        <a-entity text="value: it's party time!" position="4 3 -4" scale="10 10 10"></a-entity>
+        <!-- <a-entity camera look-controls>
+            <a-entity geometry="primitive: plane; height: 0.2; width: 0.2" position="0 0 -1"
+            material="color: gray; opacity: 0.5"></a-entity>
+        </a-entity> -->
     </a-scene>
+
+
 </body>
 
 </html>
+
+    <!-- const entity = document.querySelector('[gltf-model="#gura"]')
+    entity?.getObject3D('mesh');
+    console.log('Entity:', entity);
+    console.log('Model loaded:', entity?.getObject3D('mesh'));
+    console.log('Position:', entity?.getAttribute('position')); -->
