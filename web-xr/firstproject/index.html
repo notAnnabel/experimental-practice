@@ -67,6 +67,7 @@
             <a-assets-item id="goose" src="assets/models/geese/scene.gltf"></a-assets-item>
             <a-assets-item id="gura" src="assets/models/gura/scene.gltf"></a-assets-item>
             <a-assets-item id="calli" src="assets/models/calli/scene.gltf"></a-assets-item>
+            <a-assets-item id="amelia" src="assets/models/amelia/scene.gltf"></a-assets-item>
             <a-assets-item id="dance-floor" src="assets/models/dance-floor/untitled.glb"></a-assets-item>
             <a-assets-item id="speakers" src="assets/models/speakers/scene.gltf"></a-assets-item>
             <a-asset-item id="dj-table" src="assets/models/dj-table/scene.gltf"></a-asset-item>
@@ -105,6 +106,11 @@
             sound="src: url(assets/sfx/calli-hi-honey.mp3); on: click "></a-entity>
         <!-- SmolcalliAnimationsRESOURCE, paradewalk -->
 
+        <a-entity animation-mixer="clip: ParadeWalkLeft; useRegExp: false; startAt: 10" gltf-model="#amelia" class="interactive"
+            position="2 3.8 -6" rotation="0 20 0" scale="1 1 1"
+            sound="src: url(assets/sfx/calli-hi-honey.mp3); on: click "
+            animation="property: rotation; to: -10 -360 0; loop: true; dur: 1000; easing: linear;"></a-entity>
+
         <a-entity animation-mixer="clip: Animation; useRegExp: false" gltf-model="#dance-floor" position="0 0 -5"
             scale="2 1 2"></a-entity>
 
@@ -117,6 +123,7 @@
             <a-entity geometry="primitive: plane; height: 0.2; width: 0.2" position="0 0 -1"
             material="color: gray; opacity: 0.5"></a-entity>
         </a-entity> -->
+        <a-entity position="0 2.25 -15" particle-system="preset: snow" size="10" velocityValue="40 40 40" color="#0000FF,#00FF00,#FF0000"></a-entity>
     </a-scene>
 
 
