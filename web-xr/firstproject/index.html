@@ -7,9 +7,14 @@
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
     <!--adds interaction-->
 
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js">
+    </script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.7.x/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fern-solutions/aframe-sky-background/dist/sky-background.umd.min.js"></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@fern-solutions/aframe-sky-background/dist/sky-background.umd.min.js">
+    </script>
     <!-- physics -->
     <script>
         AFRAME.registerComponent("toggle-colour", {
@@ -32,27 +37,22 @@
             }
         })
     </script>
-    <!-- <script>
-        AFRAME.registerComponent("toggle-honk", {
+    <script>
+        AFRAME.registerComponent('animation-mixer', {
             schema: {
-                noise: { type: "mp3" }
-            },
-            init: function () {
-                // get a reference to Aframe entitty to which this component is attached
-                const el = this.el;
-                // get a ref to data
-                const data = this.data
-                // store a reference to the current colour
-                const defaultColour = el.getAttribute("material").color;
-                el.addEventListener("mouseenter", function () {
-                    el.setAttribute("color", data.colour);
-                })
-                el.addEventListener("mouseleave", function () {
-                    el.setAttribute("color", defaultColour)
-                })
+                clip: { default: "idle" },
+                useRegExp: { default: false },
+                duration: { default: 0 },
+                clampWhenFinished: { default: false, type: 'boolean' },
+                crossFadeDuration: { default: 0 },
+                loop: { default: 'repeat', oneOf: Object.keys(LoopMode) },
+                repetitions: { default: Infinity, min: 0 },
+                timeScale: { default: 1 },
+                startAt: { default: 0 }
             }
         })
-    </script> -->
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -65,25 +65,50 @@
         <a-entity laser-control="hand: left" raycaster="objects: .interactive"></a-entity>
         <a-entity laser-control="hand: right" raycaster="objects: .interactive"></a-entity>
         <a-assets>
-            <a-assets-item id="goose" src="models/scene.gltf"></a-assets-item>
+            <a-assets-item id="goose" src="assets/models/geese/scene.gltf"></a-assets-item>
+            <a-assets-item id="gura" src="assets/models/gura/scene.gltf"></a-assets-item>
+            <a-assets-item id="calli" src="assets/models/calli/scene.gltf"></a-assets-item>
+            <a-assets-item id="dance-floor" src="assets/smodels/dance-floor/untitled.glb"></a-assets-item>
+            <a-assets-item id="speakers" src="assets/models/speakers/scene.gltf"></a-assets-item>
+            <a-assets-item id="dj-table" src="assets/models/dj-table/scene.gltf"></a-assets-item>
+            <a-assets-item id="disco-ball" src="asset/smodels/disco-ball/scene.gltf"></a-assets-item>
+            <img id="sky" src="assets/images/sky.jpg">
         </a-assets>
 
 
         <a-box toggle-colour="colour: blue" class="interactive" position="-1 0.5 -3" rotation="0 45 0"
             color="#4CC3D9"></a-box> <!--if mouse down-->
-        <a-sphere toggle-colour class="interactive" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-        <a-cylinder toggle-colour class="interactive" position="1 0.75 -3" radius="0.5" height="1.5"
+        <a-sphere toggle-colour class="interactive" position="-4 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        <a-cylinder toggle-colour class="interactive" position="2.2 3 -5.9" radius="0.5" height="1.5"
             color="#FFC65D"></a-cylinder>
-        <a-plane toggle-colour class="interactive" position="0 0 -4" rotation="-90 0 0" width="4" height="4"
+        <a-plane toggle-colour class="interactive" position="0 -4 -9" rotation="-90 0 0" width="4" height="4"
             color="#7BC8A4"></a-plane>
         <a-sky color="#ECECEC"></a-sky>
-<!-- 
-
+        <!-- 
+        
         <a-entity gltf-model="#goose" position="0 0 3" size="0.001 0.001 0.001"></a-entity> -->
         <!-- <a-entity gltf-model="#goose" class="interactive" position="0 0 3" scale="0.007 0.007 0.007" sound="src: sfx/goose_honk.mp3" on: click></a-entity> -->
-         <a-entity cursor position="0 0 -5"></a-entity>
-        <a-entity gltf-model="#goose" class="interactive" position="0 0 3" scale="0.007 0.007 0.007" sound="src: url(sfx/goose_honk.mp3); on: click"></a-entity>
-        <a-entity gltf-model="#goose" class="interactive" position="0.5 2.38 -4.9" rotation="0 180 25" scale="0.003 0.003 0.003" sound="src: url(sfx/happy-goose-flaunts.mp3); on: click"></a-entity>
+
+        <a-sky src="#sky"></a-sky>
+        <a-entity cursor position="0 0 -5"></a-entity>
+        <a-entity gltf-model="#goose" class="interactive" position="0 0 -3" rotation="0 180 0" scale="0.007 0.007 0.007"
+            sound="src: url(sfx/goose_honk.mp3); on: click"></a-entity>
+        <a-entity gltf-model="#goose" class="interactive" position="-3.5 2.38 -4.9" rotation="0 180 25"
+            scale="0.003 0.003 0.003" sound="src: url(sfx/happy-goose-flaunts.mp3); on: click"></a-entity>
+
+        <a-entity animation-mixer="clip: smolguraAnimationsRESOURCE; useRegExp: false" gltf-model="#gura" class="interactive" position="-1 1 -3" rotation="0 20 0" scale="0.5 0.5 0.5"
+           sound="src: url(sfx/hey-vsauce-gura-here.mp3); on: click "></a-entity>
+
+        <a-entity animation-mixer="SmolcalliAnimationsRESOURCE; useRegExp: false" gltf-model="#calli" class="interactive" position="-2 1 -3" rotation="0 20 0" scale="0.5 0.5 0.5" sound="src: url(sfx/calli-hi-honey.mp3); on: click "></a-entity>
+
+        <a-entity animation-mixer="clip: Animation; useRegExp: false" gltf-model="#dance-floor" position="0 0 -5" scale="2 1 2"></a-entity>
+        <!-- <a-entity animation-mixer gltf-model="#gura" class="interactive" position="-1 2.12 -3" rotation="0 20 0" scale="0.3 0.3 0.3"
+            sound="src: url(sfx/hey-vsauce-gura-here.mp3); on: click"></a-entity> -->
+
+        <a-entity gltf-model="#speakers" position="-1.5 -0.1 -6" rotation="0 270 0" scale="1.4 1.4 1.4"></a-entity>
+        <a-entity gltf-model="#dj-table" position="1 1 1" rotation="0 0 0"></a-entity>
+        <a-entity animation-mixer="clip: Take 001; useRegExp: false" gltf-model="#disco-ball" position="-1 7 -4" rotation="0 0 0" scale="1.5 1.5 1.5"></a-entity>
+        <a-entity bmfont-text="text: HELLO!; color: #333" position="0 0 -5"></a-entity>
     </a-scene>
 </body>
 

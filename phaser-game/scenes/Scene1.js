@@ -75,13 +75,27 @@ class Scene1 extends Phaser.Scene {
         this.score = 0;
         this.win = false;
         // function: coordinates, default string, courier font by default
-        this.scoreText = this.add.text(560, 660, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
+        //this.scoreText = this.add.text(10, 270, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
+      
 
         // make platforms collideable
         this.map.setCollisionBetween(0, 9999);
         this.player = this.physics.add.sprite(128, 1280 - 128 * 3, "boy-run");
         //this.defaultspeed = this.player.setVelocity(20, 20)
-        this.cameras.main.startFollow(this.player, true, 0.05, 0.05); // small lag on last params for aesthetics
+        this.cameraScroll = this.cameras.main.startFollow(this.player, true, 0.05, 0.05); // small lag on last params for aesthetics
+        
+        this.scoreText = this.add.text(this.cameraScroll.x+500, this.cameraScroll.y, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
+
+
+        //this.cameras.main.startFollow(this.scoreText, true, 0.05, 0.05)
+        // this.events.on("postupdate", function() {
+        //     Phaser.Display.Align.To.TopLeft(Scene1, this.scoreText)
+        // });
+
+        //this.scoreText.setScrollFactor(1)
+        // new PathFollower(Scene1, )
+
+
         this.player.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, this.platforms);
 
@@ -208,14 +222,18 @@ class Scene1 extends Phaser.Scene {
             //         (this.rainbowIndex + 1) % this.rainbowColours.length; // ch
             // }, [], this, true)
             // }
-            this.loopWinColours = this.time.addEvent({delay: 300, callback: function () {
-                this.player.setTint(this.rainbowColours[this.rainbowIndex]);
+            this.loopWinColours = this.time.addEvent({
+                delay: 300, callback: function () {
+                    this.player.setTint(this.rainbowColours[this.rainbowIndex]);
 
-                this.rainbowIndex =
-                    (this.rainbowIndex + 1) % this.rainbowColours.length; // ch
-            }, callbackScope: this, loop: true}) // configuration object
+                    this.rainbowIndex =
+                        (this.rainbowIndex + 1) % this.rainbowColours.length; // ch
+                }, callbackScope: this, loop: true
+            }) // configuration object
         }
         //while (this.win === true) {
+
+        this.scoreText.setPosition(this.cameras.main.scrollX + 20, this.cameras.main.scrollY +20)
 
     }
 
@@ -260,7 +278,7 @@ class Scene1 extends Phaser.Scene {
             player.setTint(0xFFA500);
         }
 
-        this.powerUpTimer = this.time.delayedCall(5000, function () {
+        this.powerUpTimer = this.time.delayedCall(500, function () {
             this.powerOn = false;
 
             if (!this.win) {
