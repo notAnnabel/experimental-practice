@@ -169,7 +169,7 @@ class Scene1 extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keysWASD = this.input.keyboard.addKeys("W,A,S,D");
         this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-        this.keyPowerup = this.input.keyboard.addKey("P"); // powerup key
+        this.keyPowerup = this.input.keyboard.addKey("P"); // powerup key -- unused
 
     }
     update() {
@@ -214,14 +214,7 @@ class Scene1 extends Phaser.Scene {
             this.win = true
             this.scoreText.setText("You win!")
 
-            this.rainbowIndex = 0; //starts the rgb colour
-            //     this.loopWinColours = this.time.delayedCall(2000, function () {
-            //     this.player.setTint(this.rainbowColours[this.rainbowIndex])
-
-            //     this.rainbowIndex =
-            //         (this.rainbowIndex + 1) % this.rainbowColours.length; // ch
-            // }, [], this, true)
-            // }
+            this.rainbowIndex = 0; 
             this.loopWinColours = this.time.addEvent({
                 delay: 300, callback: function () {
                     this.player.setTint(this.rainbowColours[this.rainbowIndex]);
@@ -291,9 +284,5 @@ class Scene1 extends Phaser.Scene {
             this.powerUpTimer = null;
         }, [], this);
     } // delay in ms, callback, arguments for function, .this keyword
-
-
-
-    //}
 }
 
