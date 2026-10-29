@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tsukumo Sana (hololive)
+* source:	https://sketchfab.com/3d-models/tsukumo-sana-hololive-44c83781f0e2412c8e7442da99012b1a
+* author:	chained_tan (https://sketchfab.com/ch_fren)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tsukumo Sana (hololive)" (https://sketchfab.com/3d-models/tsukumo-sana-hololive-44c83781f0e2412c8e7442da99012b1a) by chained_tan (https://sketchfab.com/ch_fren) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
