@@ -63,7 +63,7 @@
         </a-camera>
         <a-entity laser-control="hand: left" raycaster="objects: .interactive"></a-entity>
         <a-entity laser-control="hand: right" raycaster="objects: .interactive"></a-entity>
-        <a-assets>
+        <a-assets> <!--setting up the model asset IDs + skybox -->
             <a-assets-item id="goose" src="assets/models/geese/scene.gltf"></a-assets-item>
             <a-assets-item id="gura" src="assets/models/gura/scene.gltf"></a-assets-item>
             <a-assets-item id="calli" src="assets/models/calli/scene.gltf"></a-assets-item>
@@ -108,7 +108,7 @@
 
         <a-entity animation-mixer="clip: ParadeWalkLeft; useRegExp: false; startAt: 10" gltf-model="#amelia" class="interactive"
             position="2 3.8 -6" rotation="0 20 0" scale="1 1 1"
-            sound="src: url(assets/sfx/calli-hi-honey.mp3); on: click "
+            sound="src: url(assets/sfx/amelia-weeee.mp3); on: click "
             animation="property: rotation; to: -10 -360 0; loop: true; dur: 1000; easing: linear;"></a-entity>
 
         <a-entity animation-mixer="clip: Animation; useRegExp: false" gltf-model="#dance-floor" position="0 0 -5"
@@ -118,15 +118,13 @@
         <a-entity gltf-model="#dj-table" position="-4 -0.2 2" rotation="-2 270 0" scale="0.003 0.003 0.003"></a-entity>
         <a-entity animation-mixer="clip: Take 001; useRegExp: false" gltf-model="#disco-ball" position="-1 7 -4"
             rotation="0 0 0" scale="1.5 1.5 1.5"></a-entity>
-        <a-entity text="value: it's party time!" position="4 3 -4" scale="10 10 10"></a-entity>
+        <a-entity text="value: it's party time!" class="interactive" position="4 3 -4" scale="10 10 10"></a-entity>
         <!-- <a-entity camera look-controls>
             <a-entity geometry="primitive: plane; height: 0.2; width: 0.2" position="0 0 -1"
             material="color: gray; opacity: 0.5"></a-entity>
         </a-entity> -->
         <a-entity position="0 2.25 -15" particle-system="preset: snow" size="10" velocityValue="40 40 40" color="#0000FF,#00FF00,#FF0000"></a-entity>
     </a-scene>
-
-
 </body>
 
 </html>

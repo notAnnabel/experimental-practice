@@ -76,15 +76,15 @@ class Scene1 extends Phaser.Scene {
         this.win = false;
         // function: coordinates, default string, courier font by default
         //this.scoreText = this.add.text(10, 270, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
-      
+
 
         // make platforms collideable
         this.map.setCollisionBetween(0, 9999);
         this.player = this.physics.add.sprite(128, 1280 - 128 * 3, "boy-run");
         //this.defaultspeed = this.player.setVelocity(20, 20)
         this.cameraScroll = this.cameras.main.startFollow(this.player, true, 0.05, 0.05); // small lag on last params for aesthetics
-        
-        this.scoreText = this.add.text(this.cameraScroll.x+500, this.cameraScroll.y, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
+
+        this.scoreText = this.add.text(this.cameraScroll.x + 500, this.cameraScroll.y, 'score: 0', { fontSize: '128px', fill: '#ffffff' });
 
 
         //this.cameras.main.startFollow(this.scoreText, true, 0.05, 0.05)
@@ -169,7 +169,7 @@ class Scene1 extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keysWASD = this.input.keyboard.addKeys("W,A,S,D");
         this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-        this.keyPowerup = this.input.keyboard.addKey("P"); // powerup key
+        this.keyPowerup = this.input.keyboard.addKey("P"); // powerup key -- unused
 
     }
     update() {
@@ -207,21 +207,13 @@ class Scene1 extends Phaser.Scene {
         // if (!isTouchingGround && this.spacebar.down) { 
         //     this.player.body.setVelocityY(-128 * 3)
         //     this.player.play("jump", true)
-
         // }
 
         if (this.score >= 80 && !this.win) {
             this.win = true
             this.scoreText.setText("You win!")
 
-            this.rainbowIndex = 0; //starts the rgb colour
-            //     this.loopWinColours = this.time.delayedCall(2000, function () {
-            //     this.player.setTint(this.rainbowColours[this.rainbowIndex])
-
-            //     this.rainbowIndex =
-            //         (this.rainbowIndex + 1) % this.rainbowColours.length; // ch
-            // }, [], this, true)
-            // }
+            this.rainbowIndex = 0;
             this.loopWinColours = this.time.addEvent({
                 delay: 300, callback: function () {
                     this.player.setTint(this.rainbowColours[this.rainbowIndex]);
@@ -233,7 +225,7 @@ class Scene1 extends Phaser.Scene {
         }
         //while (this.win === true) {
 
-        this.scoreText.setPosition(this.cameras.main.scrollX + 20, this.cameras.main.scrollY +20)
+        this.scoreText.setPosition(this.cameras.main.scrollX + 20, this.cameras.main.scrollY + 20)
 
     }
 
@@ -291,9 +283,5 @@ class Scene1 extends Phaser.Scene {
             this.powerUpTimer = null;
         }, [], this);
     } // delay in ms, callback, arguments for function, .this keyword
-
-
-
-    //}
 }
 
