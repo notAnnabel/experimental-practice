@@ -7,6 +7,6 @@ p5.js classes| WEEK 1 | I created a particle system which triggers when the mous
 Phaser  | WEEK 2 | I created a simple game where I experimented with making a points system |
 A-FRAME | WEEK 3 | I experimented with A-Frame to create a web-gl game that ran on any device, including in VR. It features animated dancing characters that can be clicked with to interact. For model credits, go to -> credits.txt
 | TouchDesigner | WEEK 4 | I experimented with TOPS, clipping, wave art and 3D gltf models
-| WEEK 5 ||
-| WEEK 6 ||
-| WEEK 7 ||
+| TouchDesigner - extended | WEEK 5 | I continued using touchdesigner to experiment with point generation, and 3D geometry, while also further continuing to research into (Mediapipe?)
+| Unity pt1. | WEEK 6 |
+| Unity pt2. | WEEK 7 |
