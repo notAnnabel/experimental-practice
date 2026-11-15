@@ -39,7 +39,6 @@ function mouseClicked(event) {
     if (buttons[i].buttonSelected()) {
       // the mouse has clicked in one of the buttons
       if (buttons[i].label === "Filter") {
-        // chat
         for (let j = 0; j < allShapes.length; j++) {
 
           console.log("Before:", allShapes[j].fillColour);

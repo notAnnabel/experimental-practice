@@ -3,8 +3,6 @@ class SoundButton {
     static buttonWidth = 200;
     static buttonHeight = 100;
    
-    
-
     constructor(x, y, colour, label) {
         this.x = x;
         this.y = y;
