@@ -33,20 +33,7 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614681}
       id: 0
       isStickyNote: 0
-  stickyNoteInfos:
-  - title: velocity
-    position:
-      serializedVersion: 2
-      x: 725
-      y: -488
-      width: 115
-      height: 100
-    contents: '
-
-'
-    theme: Classic
-    textSize: Small
-    colorTheme: 1
+  stickyNoteInfos: []
   categories: []
   uiBounds:
     serializedVersion: 2
