@@ -192,6 +192,24 @@
         },
         {
             "m_Id": "3c7d5483d41c4dc2ba03edd4441b6aec"
+        },
+        {
+            "m_Id": "c465ab80730c4f07ba8f05113dcdf7f5"
+        },
+        {
+            "m_Id": "9b49eb8d74484d608ec00dc6b3012353"
+        },
+        {
+            "m_Id": "ddf08aa64a4c41f58255b04dc963e248"
+        },
+        {
+            "m_Id": "20ce3a717ca0452598ce4d03b4210b42"
+        },
+        {
+            "m_Id": "68abdec438344597952570900c208d58"
+        },
+        {
+            "m_Id": "50dbe2464b1743db8d6d97aa00591400"
         }
     ],
     "m_Edges": [
@@ -821,7 +839,7 @@
     "m_ObjectId": "06f33b00ef6a43e78dd6163c4184e5ad",
     "m_Title": "Ripple creation",
     "m_Position": {
-        "x": 1260.0,
+        "x": 1259.999755859375,
         "y": -612.0
     }
 }
@@ -991,10 +1009,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1599.999755859375,
-            "y": -540.9999389648438,
-            "width": 208.0001220703125,
-            "height": 302.0
+            "x": 1628.9998779296875,
+            "y": -553.0,
+            "width": 208.0,
+            "height": 302.0000305175781
         }
     },
     "m_Slots": [
@@ -1084,6 +1102,26 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.BentNormal"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "20ce3a717ca0452598ce4d03b4210b42",
+    "m_Title": "",
+    "m_Content": "Multiplies the swirl and spinning texture results together ",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 3185.0,
+        "y": 732.0,
+        "width": 200.0,
+        "height": 63.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {
@@ -1475,16 +1513,16 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
     "m_ObjectId": "3c7d5483d41c4dc2ba03edd4441b6aec",
-    "m_Title": "New Note",
-    "m_Content": "Write something here",
+    "m_Title": "",
+    "m_Content": "creates a noise speed property that is multiplied over time. A twirl strength property is also created. Together these nodes changes the twirl speed. I added in a noise 2D texture, this texture is swirled. ",
     "m_TextSize": 0,
     "m_Theme": 0,
     "m_Position": {
         "serializedVersion": "2",
         "x": 215.0,
-        "y": 953.0,
+        "y": 1035.0,
         "width": 200.0,
-        "height": 160.0
+        "height": 114.0
     },
     "m_Group": {
         "m_Id": "b8295bb96a0e49dd9b1dd25353552824"
@@ -1503,9 +1541,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -164.0,
-            "y": 1282.0001220703125,
-            "width": 139.00003051757813,
+            "x": -13.999955177307129,
+            "y": 1285.0,
+            "width": 138.99998474121095,
             "height": 34.0
         }
     },
@@ -1726,9 +1764,29 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "50dbe2464b1743db8d6d97aa00591400",
+    "m_Title": "",
+    "m_Content": "the spinning texture is rotated with the rotate that is controlled overtime. Similar process happens with the noise except with twirl node that changes the noise texture to a swirl\n\nMore details on other notes. ",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 842.0,
+        "y": 646.0,
+        "width": 200.0,
+        "height": 160.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.GroupData",
     "m_ObjectId": "532c2ad44f884c73b28cca2aa2211e56",
-    "m_Title": "New Group",
+    "m_Title": "Spinning Texture + Swirl",
     "m_Position": {
         "x": 1325.0,
         "y": 536.0
@@ -2222,6 +2280,26 @@
         "w": 0.0
     },
     "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "68abdec438344597952570900c208d58",
+    "m_Title": "",
+    "m_Content": "Colour intensity colour property multiplies with the texture to give off the final result.  ",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 3704.0,
+        "y": 515.0,
+        "width": 196.0,
+        "height": 100.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {
@@ -2837,8 +2915,8 @@
     "m_ObjectId": "843d5468e4b0418f9a4dd4dbc182bd9d",
     "m_Title": "Spinning texture! (ctrl+g to make group)",
     "m_Position": {
-        "x": -68.0,
-        "y": 55.0
+        "x": -67.99996185302735,
+        "y": 55.0000114440918
     }
 }
 
@@ -3379,10 +3457,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 617.0000610351563,
-            "y": 1197.0001220703125,
-            "width": 130.0,
-            "height": 118.0
+            "x": 510.0000305175781,
+            "y": 1176.0,
+            "width": 130.00003051757813,
+            "height": 118.0001220703125
         }
     },
     "m_Slots": [
@@ -3475,6 +3553,26 @@
             "m_Id": "efc19c507acf4617800603869a8a53b8"
         }
     ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "9b49eb8d74484d608ec00dc6b3012353",
+    "m_Title": "",
+    "m_Content": "The one minus node subtracts the inputs by one, so it acts like a colour swapper here. \n\nThe noise speed +time are multiplied to create a change in the fraction. This fraction is added to the one minus value and as the fraction value changes the add result also changes with time.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 2363.0,
+        "y": -254.0,
+        "width": 200.0,
+        "height": 180.0
+    },
+    "m_Group": {
+        "m_Id": "06f33b00ef6a43e78dd6163c4184e5ad"
+    }
 }
 
 {
@@ -4236,8 +4334,8 @@
     "m_ObjectId": "b8295bb96a0e49dd9b1dd25353552824",
     "m_Title": "Twirl noise",
     "m_Position": {
-        "x": -189.0,
-        "y": 844.0
+        "x": -38.99994659423828,
+        "y": 844.0001220703125
     }
 }
 
@@ -4253,9 +4351,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -98.99998474121094,
-            "y": 1061.0001220703125,
-            "width": 124.00000762939453,
+            "x": 12.000025749206543,
+            "y": 1093.0,
+            "width": 123.9999771118164,
             "height": 173.0
         }
     },
@@ -4578,6 +4676,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "c465ab80730c4f07ba8f05113dcdf7f5",
+    "m_Title": "",
+    "m_Content": "the tiling and offset scales and shifts its own texture coordinates. Distance calculates the distance between the two inputs. The ripple count property affects the mulitply, ",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 1838.0,
+        "y": -260.0,
+        "width": 200.0,
+        "height": 148.0
+    },
+    "m_Group": {
+        "m_Id": "06f33b00ef6a43e78dd6163c4184e5ad"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "c856c884e1a049d488aad38637fa823c",
     "m_Id": 3,
@@ -4645,10 +4763,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 768.0000610351563,
-            "y": 1000.0000610351563,
-            "width": 166.0,
-            "height": 166.00006103515626
+            "x": 726.0,
+            "y": 984.0000610351563,
+            "width": 208.00006103515626,
+            "height": 350.00006103515627
         }
     },
     "m_Slots": [
@@ -4670,7 +4788,7 @@
     ],
     "synonyms": [],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -5126,6 +5244,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "ddf08aa64a4c41f58255b04dc963e248",
+    "m_Title": "",
+    "m_Content": "tau is the calculation for a circle's circumference in maths, this is multliplied. The sine wave creates an oscellation affect as it travels along an equal wavelength.\n\nThe ripple strength property can be changed to affect the ripple. ",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 3031.0,
+        "y": 3.0,
+        "width": 200.0,
+        "height": 160.0
+    },
+    "m_Group": {
+        "m_Id": "06f33b00ef6a43e78dd6163c4184e5ad"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "e17a332efdea4b478d0910e1f8933c3d",
     "m_Id": 2,
@@ -5270,10 +5408,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 68.00001525878906,
-            "y": 1219.0001220703125,
-            "width": 128.0,
-            "height": 101.0
+            "x": 247.00003051757813,
+            "y": 1220.0,
+            "width": 128.00003051757813,
+            "height": 101.0001220703125
         }
     },
     "m_Slots": [
@@ -5562,15 +5700,15 @@
     "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
     "m_ObjectId": "f2fb02242ce7470d83cc630f3b2b9919",
     "m_Title": "",
-    "m_Content": "creates a variable for speed, multiplies it over time. This value then changes the rotate node that is applied to the texture.",
+    "m_Content": "creates a property for rotation speed, multiplies it over time. This value then changes the rotate node that is applied to the texture.",
     "m_TextSize": 0,
     "m_Theme": 0,
     "m_Position": {
         "serializedVersion": "2",
-        "x": 211.0,
-        "y": 580.0,
+        "x": 215.0,
+        "y": 497.0,
         "width": 200.0,
-        "height": 160.0
+        "height": 100.0
     },
     "m_Group": {
         "m_Id": "843d5468e4b0418f9a4dd4dbc182bd9d"
