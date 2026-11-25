@@ -839,7 +839,7 @@
     "m_ObjectId": "06f33b00ef6a43e78dd6163c4184e5ad",
     "m_Title": "Ripple creation",
     "m_Position": {
-        "x": 1259.999755859375,
+        "x": 1260.000244140625,
         "y": -612.0
     }
 }
@@ -1788,8 +1788,8 @@
     "m_ObjectId": "532c2ad44f884c73b28cca2aa2211e56",
     "m_Title": "Spinning Texture + Swirl",
     "m_Position": {
-        "x": 1325.0,
-        "y": 536.0
+        "x": 1325.000244140625,
+        "y": 536.0000610351563
     }
 }
 
@@ -2915,8 +2915,8 @@
     "m_ObjectId": "843d5468e4b0418f9a4dd4dbc182bd9d",
     "m_Title": "Spinning texture! (ctrl+g to make group)",
     "m_Position": {
-        "x": -67.99996185302735,
-        "y": 55.0000114440918
+        "x": -68.0,
+        "y": 55.00000762939453
     }
 }
 
@@ -4334,8 +4334,8 @@
     "m_ObjectId": "b8295bb96a0e49dd9b1dd25353552824",
     "m_Title": "Twirl noise",
     "m_Position": {
-        "x": -38.99994659423828,
-        "y": 844.0001220703125
+        "x": -39.0,
+        "y": 844.0
     }
 }
 
