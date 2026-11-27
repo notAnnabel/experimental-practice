@@ -39,7 +39,7 @@ public class BurningScript : MonoBehaviour
         { // disable particles
             burningMaterial.SetFloat("_Burning", Mathf.Clamp((burningCounter -= Time.deltaTime),0,1));
             Debug.Log("Not Burning");
-        }
+        } 
 
         if (burningMaterial.GetFloat("_Burning") >= 1)
         {
