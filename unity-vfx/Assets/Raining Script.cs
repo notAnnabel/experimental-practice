@@ -25,12 +25,12 @@ public class RainingScript : MonoBehaviour
 
         if (activated && cloudMaterial.GetFloat("_isRaining") < 1)
         {
-            cloudMaterial.SetFloat("_isRaining", Mathf.Clamp((rainingCounter += Time.deltaTime),0,1));
+            cloudMaterial.SetFloat("_isRaining", Mathf.Clamp(rainingCounter += Time.deltaTime,0,1));
             Debug.Log("raining");
         }
         else if (!activated && cloudMaterial.GetFloat("_isRaining") > 0)
         {
-            cloudMaterial.SetFloat("_isRaining", Mathf.Clamp((rainingCounter -= Time.deltaTime),0,1));
+            cloudMaterial.SetFloat("_isRaining", Mathf.Clamp(rainingCounter -= Time.deltaTime,0,1));
             Debug.Log("not raining");
         }
 
@@ -38,10 +38,12 @@ public class RainingScript : MonoBehaviour
         if (cloudMaterial.GetFloat("_isRaining") >=1)
         {
             rainingVisualEffect.SetBool("RainOn", true);
+            Debug.Log("raining going");
         }
         else if (cloudMaterial.GetFloat("_isRaining") <= 0)
         {
             rainingVisualEffect.SetBool("RainOn", false);
+            Debug.Log("not raining going");
         }
 
     }
