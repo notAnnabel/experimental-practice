@@ -50,7 +50,7 @@ Material:
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
     - _Brightness: 10
-    - _Burning: 1
+    - _Burning: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
